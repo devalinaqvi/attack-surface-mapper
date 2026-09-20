@@ -1,0 +1,552 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "project": {
+      "type": "string"
+    },
+    "ecosystem": {
+      "type": "string"
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "package_statistics": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "total": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "direct": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "transitive": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "development": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "unreachable_from_root": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "total",
+        "direct",
+        "transitive",
+        "development",
+        "unreachable_from_root"
+      ]
+    },
+    "dependency_graph": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "root": {
+          "const": "@root"
+        },
+        "root_known": {
+          "type": "boolean"
+        },
+        "nodes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/package"
+          }
+        },
+        "edges": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/edge"
+          }
+        },
+        "requirements": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/requirement"
+          }
+        }
+      },
+      "required": [
+        "root",
+        "root_known",
+        "nodes",
+        "edges",
+        "requirements"
+      ]
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/finding"
+      }
+    },
+    "capabilities": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "install_execution",
+          "native_code",
+          "network_access",
+          "subprocess_execution",
+          "filesystem_access",
+          "dynamic_code_loading",
+          "environment_access",
+          "privilege_related_operations",
+          "internet_facing_reach"
+        ]
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/evidence"
+      }
+    },
+    "attack_paths": {
+      "type": "array",
+      "maxItems": 0
+    },
+    "analysis_metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "tool_version": {
+          "type": "string"
+        },
+        "include_dev": {
+          "type": "boolean"
+        },
+        "content_inspection_requested": {
+          "type": "boolean"
+        },
+        "content_coverage": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "reachability": {
+          "const": "not_analyzed"
+        },
+        "network_used": {
+          "const": false
+        },
+        "package_code_executed": {
+          "const": false
+        },
+        "limits": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "metadata_bytes": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "packages": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "edges": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "files": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "file_bytes": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "content_bytes": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "directory_depth": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "evidence_per_package": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "required": [
+            "metadata_bytes",
+            "packages",
+            "edges",
+            "files",
+            "file_bytes",
+            "content_bytes",
+            "directory_depth",
+            "evidence_per_package"
+          ]
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "detectors": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "tool_version",
+        "include_dev",
+        "content_inspection_requested",
+        "content_coverage",
+        "reachability",
+        "network_used",
+        "package_code_executed",
+        "limits",
+        "warnings",
+        "detectors"
+      ]
+    }
+  },
+  "required": [
+    "schema_version",
+    "project",
+    "ecosystem",
+    "generated_at",
+    "package_statistics",
+    "dependency_graph",
+    "findings",
+    "capabilities",
+    "evidence",
+    "attack_paths",
+    "analysis_metadata"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Dependency Attack Surface Mapper report v1",
+  "$defs": {
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "type": "string"
+        },
+        "source": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        },
+        "observation": {
+          "type": "string"
+        },
+        "rationale": {
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "observed",
+            "inferred",
+            "heuristic"
+          ]
+        }
+      },
+      "required": [
+        "kind",
+        "source",
+        "location",
+        "observation",
+        "rationale",
+        "status"
+      ]
+    },
+    "coverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "state": {
+          "enum": [
+            "complete",
+            "partial",
+            "unavailable",
+            "not_requested"
+          ]
+        },
+        "files_seen": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "state",
+        "files_seen",
+        "warnings"
+      ]
+    },
+    "package": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "package_type": {
+          "type": "string"
+        },
+        "development": {
+          "type": "boolean"
+        },
+        "metadata": {
+          "type": "object"
+        },
+        "direct": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "depth": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "content_inspection": {
+          "$ref": "#/$defs/coverage"
+        }
+      },
+      "required": [
+        "name",
+        "version",
+        "package_type",
+        "development",
+        "metadata",
+        "direct",
+        "depth",
+        "content_inspection"
+      ]
+    },
+    "edge": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "parent": {
+          "type": "string"
+        },
+        "child": {
+          "type": "string"
+        },
+        "requirement": {
+          "type": "string"
+        },
+        "constraint": {
+          "type": "string"
+        },
+        "resolution": {
+          "enum": [
+            "exact",
+            "candidate-provide",
+            "candidate-replace"
+          ]
+        },
+        "scope": {
+          "enum": [
+            "runtime",
+            "development"
+          ]
+        }
+      },
+      "required": [
+        "parent",
+        "child",
+        "requirement",
+        "constraint",
+        "resolution",
+        "scope"
+      ]
+    },
+    "requirement": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "parent": {
+          "type": "string"
+        },
+        "requirement": {
+          "type": "string"
+        },
+        "constraint": {
+          "type": "string"
+        },
+        "resolution": {
+          "enum": [
+            "exact",
+            "platform",
+            "root-provided",
+            "candidate-provider",
+            "unresolved"
+          ]
+        },
+        "scope": {
+          "enum": [
+            "runtime",
+            "development"
+          ]
+        }
+      },
+      "required": [
+        "parent",
+        "requirement",
+        "constraint",
+        "resolution",
+        "scope"
+      ]
+    },
+    "finding": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "package": {
+          "type": "string"
+        },
+        "capability": {
+          "enum": [
+            "install_execution",
+            "native_code",
+            "network_access",
+            "subprocess_execution",
+            "filesystem_access",
+            "dynamic_code_loading",
+            "environment_access",
+            "privilege_related_operations",
+            "internet_facing_reach"
+          ]
+        },
+        "status": {
+          "enum": [
+            "observed",
+            "inferred",
+            "heuristic"
+          ]
+        },
+        "confidence": {
+          "enum": [
+            "high",
+            "medium",
+            "low"
+          ]
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/evidence"
+          },
+          "minItems": 1
+        },
+        "context": {
+          "type": "object"
+        },
+        "recommendation": {
+          "type": "string"
+        },
+        "depth": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "direct": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "shortest_dependency_path": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "string"
+          }
+        },
+        "exposure": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "application_reachability": {
+              "const": "unknown"
+            }
+          },
+          "required": [
+            "application_reachability"
+          ]
+        },
+        "review_priority": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "order": {
+              "enum": [
+                1,
+                2,
+                3
+              ]
+            },
+            "reason": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "order",
+            "reason"
+          ]
+        }
+      },
+      "required": [
+        "package",
+        "capability",
+        "status",
+        "confidence",
+        "evidence",
+        "context",
+        "recommendation",
+        "depth",
+        "direct",
+        "shortest_dependency_path",
+        "exposure",
+        "review_priority"
+      ]
+    }
+  }
+}

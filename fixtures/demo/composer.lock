@@ -1,0 +1,9 @@
+{
+  "packages": [
+    {"name": "example/framework", "version": "1.0.0", "require": {"example/bridge": "^1.0", "example/native": "dev-main", "php": "^8.2"}},
+    {"name": "example/bridge", "version": "1.2.0", "require": {"example/native": "dev-main", "example/plugin": "^1.0"}},
+    {"name": "example/native", "version": "dev-main", "scripts": {"post-install-cmd": "echo dependency scripts do not run"}, "license": ["MIT"]},
+    {"name": "example/plugin", "version": "1.0.0", "type": "composer-plugin", "require": {"composer-plugin-api": "^2.0"}, "extra": {"class": "Example\\Plugin"}}
+  ],
+  "packages-dev": [{"name": "example/dev-tools", "version": "1.0.0", "require": {"example/bridge": "^1.0"}}]
+}

@@ -1,0 +1,7 @@
+{
+  "name": "example/laravel-app",
+  "require": {"example/framework": "^1.0"},
+  "require-dev": {"example/dev-tools": "^1.0"},
+  "scripts": {"post-autoload-dump": ["Example\\ComposerScripts::postAutoloadDump"]},
+  "config": {"allow-plugins": {"example/plugin": false}}
+}
