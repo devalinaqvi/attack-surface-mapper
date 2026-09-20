@@ -1,5 +1,8 @@
 # Dependency Attack Surface Mapper
 
+[![Built with OpenAI Codex](https://img.shields.io/badge/built%20with-OpenAI%20Codex-412991?logo=openai&logoColor=white)](https://openai.com/codex/)
+[![License: Apache 2.0](https://img.shields.io/badge/license-Apache--2.0-blue)](LICENSE)
+
 **Capability over vulnerability.** A Python CLI and library that maps what Composer dependencies may be able to do, why they were flagged, and how they entered an application.
 
 A vulnerability scanner connects packages to known CVEs. DAM connects dependencies to **capabilities, evidence, confidence, and dependency paths**. Capability is neither vulnerability nor maliciousness. V0.1 does not calculate a risk score or claim that dependency relationships prove application reachability.
@@ -115,4 +118,4 @@ Reports can contain private package names, repository URLs, source references, a
 
 ## License and attribution
 
-Licensed under [Apache License 2.0](LICENSE); see [NOTICE](NOTICE). Created by Ali Naqvi with assistance from OpenAI Codex. Codex-assisted commits use the verified attribution trailer `Co-authored-by: Codex <noreply@openai.com>`. This records assistance and does not imply endorsement by OpenAI.
+Licensed under [Apache License 2.0](LICENSE); see [NOTICE](NOTICE). Created by Ali Naqvi with assistance from OpenAI Codex, which wrote much of the initial implementation, tests, and documentation under review. Codex-assisted commits use the verified attribution trailer `Co-authored-by: Codex <noreply@openai.com>`. This records assistance and does not imply endorsement by OpenAI. See [AUTHORS.md](AUTHORS.md).

@@ -12,6 +12,7 @@ Start with the project [README](../README.md), then choose a guide:
 | [Roadmap](roadmap.md) | Implemented scope and planned capabilities |
 | [Security policy](../SECURITY.md) | Threat model and vulnerability reporting |
 | [Contributing](../CONTRIBUTING.md) | Development tools and contribution practices |
+| [Authors](../AUTHORS.md) | Human authorship and AI-assistance attribution |
 | [JSON schema](../schemas/report-1.0.0.schema.json) | Machine-readable scan report contract |
 | [Changelog](../CHANGELOG.md) | Release changes |
 | [License](../LICENSE) and [NOTICE](../NOTICE) | Apache-2.0 terms and attribution |

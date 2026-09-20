@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Record OpenAI Codex assistance in AUTHORS.md and README badges alongside the existing commit trailer.
 - Switch project licensing to Apache-2.0, including distribution metadata and NOTICE.
 - Expand setup, usage, troubleshooting, CI billing, and public-release privacy documentation.
 - Bound CI job duration, cancel superseded runs, and allow manual execution.

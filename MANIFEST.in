@@ -1,4 +1,4 @@
-include LICENSE NOTICE SECURITY.md CONTRIBUTING.md CHANGELOG.md Makefile
+include LICENSE NOTICE AUTHORS.md SECURITY.md CONTRIBUTING.md CHANGELOG.md Makefile
 recursive-include docs *.md
 recursive-include schemas *.json
 recursive-include tests *.py
